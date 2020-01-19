@@ -1,0 +1,20 @@
+{
+    "name": "Level 1",
+    "description": "Blabla",
+    "textures": [
+        "texture1",
+        "texture2"
+    ],
+    "sizex": 60,
+    "sizey": 60,
+    "matrixlayers": [
+        {
+            "layer": 1,
+            "matrix": [0,0,0,0]
+        },
+        {
+            "layer": 2,
+            "matrix": [0,0,0,0]
+        }
+    ]
+  }
