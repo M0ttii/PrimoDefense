@@ -10,12 +10,8 @@ from Texture import Texture
 class Game(object):
 
     def __init__(self, main, ScreenManager, tileSizeX, tileSizeY, map="base"):
-        '''
-        Constructor
-        '''
         self.main = main
         self.screenManager = ScreenManager
-        #self.logger = self.main.logger
         self.tileSizeX = tileSizeX  # H
         self.tileSizeY = tileSizeY  # W
 
@@ -26,7 +22,7 @@ class Game(object):
         self.MapMovConst = 10
         self.RegisterMapMovement()
 
-        self.RecalculateDisplayTiles = True  # determine if we have to recalculate which tiles should be shown
+        self.RecalculateDisplayTiles = True 
         self.RDT_X_S = None
         self.RDT_X_E = None
         self.RDT_Y_S = None
@@ -39,13 +35,10 @@ class Game(object):
         self.screenManager.setBackgrounColor(self.screenManager.colors["Black"], 1.0)
         self.MouseSelectedTexture = Texture("resources/graphics/map/select_tile.png")
         self.test = Texture("resources/graphics/map/grass.png")
-        self.MouseActive = True  # False when user is in GUI
+        self.MouseActive = True 
         self.InGameMenuActive = False
 
         self.main.EventHandler.registerKEYDOWNevent(K_ESCAPE, self.KEYDOWNesc)
-        #self.InGameMenu = InGameMenu(self.main, self.screenManager, self,
-         #                            self.screenManager.size[0]/2-100,
-          #                           self.screenManager.size[1]/2-215)
 
     def _IsoMathHelperInit(self):
         self.IsoMathHelper = IsoMathHelper(self.tileSizeY/2, self.tileSizeX/2,
@@ -70,8 +63,6 @@ class Game(object):
             self.MouseSelectedTexture.draw(select_x, select_y)
             self.test.draw(select_x, select_y - 50)
 
-        #if self.InGameMenuActive:
-         #   self.InGameMenu.draw()
 
     def moveMap(self, dir1, dir2):
         if dir1:
@@ -164,10 +155,6 @@ class Game(object):
         self.RecalculateDisplayTiles = False
 
     def KEYDOWNesc(self):
-        #if self.InGameMenuActive:
-         #   self.closeInGameMenu()
-        #else:
-            #self.openInGameMenu()
         pass
 
     def openInGameMenu(self):

@@ -86,14 +86,7 @@ class ScreenManager(object):
     def setBackgrounColor(self, color, alpha=0.0):
         self.backgroundColorR, self.backgroundColorG, self.backgroundColorB = color
         self.backgroundColorA = alpha
-        #self.logger.log(0, "ScreenManager", "Setting background color to " + str(color))
 
-    #def OpenMainMenu(self):
-     #   self.logger.log(1, "ScreenManager", "Opening MainMenu")
-      #  if self.screen is not None:
-      #      self.screen.stop()
-      #  del(self.screen)
-      #  self.screen = MainMenu(self.main, self)
 
     def openMenu(self):
         if self.screen is not None:
@@ -106,14 +99,6 @@ class ScreenManager(object):
             self.screen.stop()
         del(self.screen)
         self.screen = Game(self.main, self, 64, 128, map)
-
-    #def OpenSelectMap(self, nextScreen=None):
-     #   if nextScreen is None:
-     #       nextScreen = self.OpenGame
-     #   if self.screen is not None:
-     #       self.screen.stop()
-      #  del(self.screen)
-      #  self.screen = SelectMap(self.main, self, nextScreen)
 
     def draw(self):
         try:

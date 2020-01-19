@@ -5,8 +5,6 @@ from manager.EventHandler import EventHandler
 
 class main(object):
     def __init__(self):
-        #self.logger = Logger(True)
-
         self.EventHandler = EventHandler(self)
         self.ScreenManager = ScreenManager(self, 1024, 600, 30)
         self.loop = True

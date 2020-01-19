@@ -13,7 +13,7 @@ class Menu(object):
         self.display_surf = screenManager.display_surf
         self.colors = screenManager.colors
         self.middle = screenManager.size[0]/2
-        self.logo = Text("Primo Attack - Level Creator", 30, self.colors["White"], self.middle-130,
+        self.logo = Text("Primo Defense - Level Creator", 30, self.colors["White"], self.middle-130,
                          self.screenManager.size[1]/10)
 
         self.createButtons()
@@ -23,6 +23,7 @@ class Menu(object):
         self.logo.draw()
         self.CreateButton.draw()
         self.OpenButton.draw()
+        self.image.draw()
 
     def createButtons(self):
         self.CreateButton = Button(self.main,

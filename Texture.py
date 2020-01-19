@@ -6,7 +6,6 @@ from OpenGL.GLU import *
 class Texture(object):
     def __init__(self, src, surf=None, rect=None):
         if src is not None:
-            """src -from where shuld be image loaded"""
             image = pygame.image.load(src)
             print(image)
             self.rect = image.get_rect()

@@ -8,29 +8,6 @@ import numpy
 
 
 class Map(object):
-    '''
-    @param src: Location of .map file
-    @note: Load/Save/Edit Map
-    @note: there can be only 256 textures (0-255)
-    @todo: move map size info before textures
-    bin map file definition
-        <> - string
-        [] - int
-        <version> = ISO_Game_1.0
-        <name> - name of map
-        <desc> - descryption
-        <texture> - name of texture without .PNG
-        {} - loop
-        \1 - start of heading
-        \2 - start of text
-        \3 - end of text
-        \25 - end of medium
-        \30 - End of Record Seperator
-        ----- FILE -----
-        \1<version>\3<name>\3<author>\3<desc>\3\30{\2<texture>\3}\30 # header
-        [len-x-1][len-x-2]\3[len-y-1][len-y-2]\3\30 # size
-        \1{\2{[index]}\3}\30\25 # matrix
-    '''
 
     def __init__(self, src):
         self.Header = "ISO_Game_1.0"
