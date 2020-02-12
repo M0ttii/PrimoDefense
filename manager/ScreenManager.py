@@ -32,7 +32,7 @@ class ScreenManager(object):
         self.backgroundColorA = 1.0
 
         self.screen = None
-        self.openMenu()
+        self.OpenGame()
 
     def _PygameInit(self):
         pygame.init()
