@@ -6,13 +6,15 @@ from utils.Isometric import IsoMathHelper
 from manager.MapManager import Map
 from manager.MapManagerJSON import MapJSON
 from Texture import Texture
+from ui.Button import Button
 
 
 class Game(object):
-
     def __init__(self, main, ScreenManager, tileSizeX, tileSizeY, map="base"):
         self.main = main
         self.screenManager = ScreenManager
+        self.display_surf = ScreenManager.display_surf
+        self.middle = ScreenManager.size[0]/2
         self.tileSizeX = tileSizeX  # H
         self.tileSizeY = tileSizeY  # W
 
@@ -42,9 +44,21 @@ class Game(object):
         self.test = Texture("resources/graphics/map/holzblock.png")
         self.MouseActive = True 
         self.InGameMenuActive = False
+        self.button = Button(self.main,
+                                        self.display_surf,
+                                        self.screenManager.colors["Gray"],
+                                        self.screenManager.colors["Blue"],
+                                        self.screenManager.colors["Yellow"],
+                                        self.screenManager.colors["White"],
+                                        self.middle-200,
+                                        (self.screenManager.size[1]/10)*2+140,
+                                        400, 80,
+                                        "Create Level", 60,
+                                        self.place)
 
         self.main.EventHandler.registerKEYDOWNevent(K_ESCAPE, self.KEYDOWNesc)
-        self.main.EventHandler.registerKEYDOWNevent(MOUSEBUTTONUP, self.place)
+        self.main.EventHandler.registerMOUSEBUTTONDOWNevent(1, self.place)
+        self.button.draw()
 
     def _IsoMathHelperInit(self):
         self.IsoMathHelper = IsoMathHelper(self.tileSizeY/2, self.tileSizeX/2,
@@ -62,20 +76,27 @@ class Game(object):
                 self.tiles[tile].draw(tile_x, tile_y)
                 #if layer1 = 1:
                 #    self.tiles[3].draw(tile_x, tile_y)
+        for i in range(len(self.MapJSON.matrix[1])):
+            for j in range(len(self.MapJSON.matrix[1][i])):
+                layer1 = self.MapJSON.matrix[1][i][j]
+
+                tile_i, tile_j = self.IsoMathHelper.Map2ScreenFIN((j, i),self.MapPos)
+                if layer1 == 1:
+                    print(tile_i)
+                    self.tiles[1].draw(tile_i, tile_j - 50) 
 
         mouseCoord = self.IsoMathHelper.Screen2MapFIN(pygame.mouse.get_pos(),self.MapPos)
 
         if -1 < mouseCoord[0] <= self.MapJSON.sizeX and -1 < mouseCoord[1] <= self.MapJSON.sizeY and self.MouseActive:
-            select_x, select_y = self.IsoMathHelper.Map2ScreenFIN((int(mouseCoord[0]),
-                                                                   int(mouseCoord[1])),
-                                                                  self.MapPos)
+            select_x, select_y = self.IsoMathHelper.Map2ScreenFIN((int(mouseCoord[0]),int(mouseCoord[1])),self.MapPos)
             self.MouseSelectedTexture.draw(select_x, select_y)
             self.test.draw(select_x, select_y - 50)
 
     def place(self):
-        pass
-        #mouseCoord = self.IsoMathHelper.Screen2MapFIN(pygame.mouse.get_pos(),self.MapPos)
-
+        mouseCoord = self.IsoMathHelper.Screen2MapFIN(pygame.mouse.get_pos(),self.MapPos)
+        if -1 < mouseCoord[0] <= self.MapJSON.sizeX and -1 < mouseCoord[1] <= self.MapJSON.sizeY and self.MouseActive:
+            select_x, select_y = self.IsoMathHelper.Map2ScreenFIN((int(mouseCoord[0]),int(mouseCoord[1])),self.MapPos)
+            self.MapJSON.matrix[1][int(mouseCoord[1]/1)][int(mouseCoord[0]/1)] = 1
 
 
 
@@ -170,7 +191,7 @@ class Game(object):
         self.RecalculateDisplayTiles = False
 
     def KEYDOWNesc(self):
-        pass
+        print("Hi")
 
     def openInGameMenu(self):
         self.MouseActive = False
